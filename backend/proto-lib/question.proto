@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package questions;
+
+message Question {
+  int32 id = 1;
+  string title = 2;
+}
+
+message QuestionRes {
+  int32 id = 1;
+}
+
+
+service QuestionService {
+  rpc GetRandom(QuestionRes) returns (Question);
+}

@@ -1,0 +1,32 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "js_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_proto_grpc//js:defs.bzl", "js_grpc_node_library")
+
+package(default_visibility = ["//visibility:public"])
+
+proto_library(
+    name = "proto",
+    srcs = ["question.proto"],
+    strip_import_prefix = "/backend/proto-lib",
+    deps = [
+        "@com_google_protobuf//:empty_proto",
+    ],
+)
+
+js_grpc_node_library(
+    name = "components_proto",
+    prefix_path = "../",
+    protos = [":proto"],
+)
+
+js_library(
+    name = "proto-lib",
+    package_name = "@backend/proto-lib",
+    srcs = [
+        "package.json",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":components_proto",
+    ],
+)
