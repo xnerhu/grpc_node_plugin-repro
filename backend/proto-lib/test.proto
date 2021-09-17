@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package questions;
+
+message Testxd {
+  int32 id = 1;
+}
+
+message TestRes {
+  int32 id = 1;
+}
+
+
+service TestService {
+  rpc GetRandom(TestRes) returns (Testxd);
+}
